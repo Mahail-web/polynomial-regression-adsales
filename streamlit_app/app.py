@@ -41,59 +41,88 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .main-header {
-        font-size: 2.1rem;
-        font-weight: 700;
-        color: #0F172A;
-        margin-bottom: 0.2rem;
+    /* Headings and Titles: Crisp White & Light Grey */
+    h1, h2, h3, h4, h5, h6,
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4,
+    [data-testid="stHeadingWithActionElements"] h1,
+    [data-testid="stHeadingWithActionElements"] h2,
+    [data-testid="stHeadingWithActionElements"] h3,
+    .stHeadingContainer h1, .stHeadingContainer h2, .stHeadingContainer h3,
+    div[data-testid="stSidebar"] h1, div[data-testid="stSidebar"] h2, div[data-testid="stSidebar"] h3 {
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
     }
+
+    .main-header {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #FFFFFF !important;
+        margin-bottom: 0.25rem;
+        letter-spacing: -0.02em;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
     .sub-header {
         font-size: 1.05rem;
-        color: #475569;
+        color: #E2E8F0 !important;
         margin-bottom: 1.5rem;
+        font-weight: 400;
     }
+
+    /* Metric Cards styled for contrast and clarity */
     .metric-card {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 8px;
-        padding: 16px;
+        background: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 10px;
+        padding: 18px 14px;
         text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
     .metric-title {
         font-size: 0.85rem;
-        color: #64748B;
+        color: #CBD5E1 !important;
         text-transform: uppercase;
         font-weight: 600;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
     }
     .metric-value {
-        font-size: 1.8rem;
+        font-size: 1.85rem;
         font-weight: 700;
-        color: #0F172A;
-        margin-top: 4px;
+        color: #FFFFFF !important;
+        margin-top: 6px;
     }
     .metric-sub {
-        font-size: 0.8rem;
-        color: #0D9488;
-        margin-top: 2px;
+        font-size: 0.82rem;
+        color: #2DD4BF !important;
+        margin-top: 3px;
+        font-weight: 500;
     }
+
+    /* Callout styling with light text for readability */
     .info-callout {
-        background-color: #F0FDFA;
-        border-left: 4px solid #0D9488;
-        padding: 12px 16px;
-        border-radius: 4px;
-        margin: 12px 0;
-        font-size: 0.92rem;
-        color: #134E4A;
+        background-color: rgba(13, 148, 136, 0.16);
+        border-left: 4px solid #14B8A6;
+        padding: 14px 18px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.95rem;
+        color: #F1F5F9 !important;
     }
+    .info-callout b, .info-callout strong {
+        color: #FFFFFF !important;
+    }
+
     .warning-callout {
-        background-color: #FFFBEB;
+        background-color: rgba(245, 158, 11, 0.16);
         border-left: 4px solid #F59E0B;
-        padding: 12px 16px;
-        border-radius: 4px;
-        margin: 12px 0;
-        font-size: 0.92rem;
-        color: #92400E;
+        padding: 14px 18px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.95rem;
+        color: #FEF3C7 !important;
+    }
+    .warning-callout b, .warning-callout strong {
+        color: #FFFFFF !important;
     }
     </style>
     """,
@@ -228,7 +257,7 @@ if selected_section == "Overview":
             },
             title="Multi-channel Advertising Spend vs. Sales (Bubble Size = Radio, Color = Newspaper)",
         )
-        fig.update_layout(height=420, template="plotly_white")
+        fig.update_layout(height=420, template="plotly_dark")
         st.plotly_chart(fig, use_container_width=True)
 
     with c2:
@@ -332,7 +361,7 @@ elif selected_section == "Sales Predictor":
             color_discrete_map={"TV": "#0D9488", "Radio": "#3B82F6", "Newspaper": "#F59E0B"},
             title="Budget Allocation Breakdown ($1,000s)",
         )
-        fig_bar.update_layout(height=260, template="plotly_white", showlegend=False)
+        fig_bar.update_layout(height=260, template="plotly_dark", showlegend=False)
         st.plotly_chart(fig_bar, use_container_width=True)
 
 
@@ -392,7 +421,7 @@ elif selected_section == "Budget Optimizer":
             go.Bar(name="Radio", x=cand_df["name"], y=cand_df["radio"], marker_color="#3B82F6"),
             go.Bar(name="Newspaper", x=cand_df["name"], y=cand_df["newspaper"], marker_color="#F59E0B"),
         ])
-        fig_comp.update_layout(barmode="stack", title="Channel Spending Across Strategies", height=320, template="plotly_white")
+        fig_comp.update_layout(barmode="stack", title="Channel Spending Across Strategies", height=320, template="plotly_dark")
         st.plotly_chart(fig_comp, use_container_width=True)
 
         if opt_res["financial_scenario"]:
@@ -468,7 +497,7 @@ elif selected_section == "Diminishing Returns":
                 name="Current Point",
             )
         )
-        fig_curve.update_layout(height=320, template="plotly_white")
+        fig_curve.update_layout(height=320, template="plotly_dark")
         st.plotly_chart(fig_curve, use_container_width=True)
 
         # Plot Marginal Effect Curve
@@ -481,7 +510,7 @@ elif selected_section == "Diminishing Returns":
             labels={"spend": f"{selected_ch} Spend ($1,000s)", "marginal_sales": "Marginal Sales (Units per $1k)"},
             color_discrete_sequence=["#0D9488"],
         )
-        fig_marg.update_layout(height=260, template="plotly_white")
+        fig_marg.update_layout(height=260, template="plotly_dark")
         st.plotly_chart(fig_marg, use_container_width=True)
 
 
@@ -524,7 +553,7 @@ elif selected_section == "Model Performance":
         fig_diag.add_trace(
             go.Scatter(x=[min_v, max_v], y=[min_v, max_v], mode="lines", line=dict(dash="dash", color="gray"), name="Perfect Fit")
         )
-        fig_diag.update_layout(height=350, template="plotly_white")
+        fig_diag.update_layout(height=350, template="plotly_dark")
         st.plotly_chart(fig_diag, use_container_width=True)
 
     with c2:
@@ -538,7 +567,7 @@ elif selected_section == "Model Performance":
             color_discrete_sequence=["#EF4444"],
         )
         fig_res.add_hline(y=0, line_dash="dash", line_color="gray")
-        fig_res.update_layout(height=350, template="plotly_white")
+        fig_res.update_layout(height=350, template="plotly_dark")
         st.plotly_chart(fig_res, use_container_width=True)
 
     st.markdown("### Complexity vs. Overfitting: Degrees 1 to 4 Comparison")
@@ -548,7 +577,7 @@ elif selected_section == "Model Performance":
     fig_comp_line = go.Figure()
     fig_comp_line.add_trace(go.Scatter(x=comp_df["degree"], y=comp_df["r2_score"], mode="lines+markers", name="Test R²", line=dict(color="#0D9488", width=3)))
     fig_comp_line.add_trace(go.Scatter(x=comp_df["degree"], y=comp_df["cv_r2_mean"], mode="lines+markers", name="5-Fold CV Train R²", line=dict(color="#3B82F6", dash="dot")))
-    fig_comp_line.update_layout(title="Test R² vs. CV R² by Degree", xaxis_title="Polynomial Degree", yaxis_title="R² Score", height=300, template="plotly_white")
+    fig_comp_line.update_layout(title="Test R² vs. CV R² by Degree", xaxis_title="Polynomial Degree", yaxis_title="R² Score", height=300, template="plotly_dark")
     st.plotly_chart(fig_comp_line, use_container_width=True)
 
 
@@ -583,12 +612,12 @@ elif selected_section == "Data Explorer":
         with f_col1:
             tv_bins = pd.DataFrame(eda["histograms"]["TV"])
             fig_tv = px.bar(tv_bins, x="bin_label", y="count", title="TV Spend Distribution", labels={"bin_label": "Spend Range ($1,000s)", "count": "Frequency"})
-            fig_tv.update_layout(height=280, template="plotly_white")
+            fig_tv.update_layout(height=280, template="plotly_dark")
             st.plotly_chart(fig_tv, use_container_width=True)
         with f_col2:
             sales_bins = pd.DataFrame(eda["histograms"]["Sales"])
             fig_sales = px.bar(sales_bins, x="bin_label", y="count", title="Sales Distribution", labels={"bin_label": "Sales Range (1,000 units)", "count": "Frequency"}, color_discrete_sequence=["#0D9488"])
-            fig_sales.update_layout(height=280, template="plotly_white")
+            fig_sales.update_layout(height=280, template="plotly_dark")
             st.plotly_chart(fig_sales, use_container_width=True)
 
     with tab3:
@@ -602,7 +631,7 @@ elif selected_section == "Data Explorer":
             text_auto=True,
             title="Pearson Correlation Matrix",
         )
-        fig_corr.update_layout(height=380, template="plotly_white")
+        fig_corr.update_layout(height=380, template="plotly_dark")
         st.plotly_chart(fig_corr, use_container_width=True)
 
         st.markdown("#### Key Statistical Insights")
@@ -653,7 +682,7 @@ elif selected_section == "About the Model":
         color="Type",
         title="Fitted Polynomial Coefficients (Degree 2)",
     )
-    fig_coef.update_layout(height=350, template="plotly_white")
+    fig_coef.update_layout(height=350, template="plotly_dark")
     st.plotly_chart(fig_coef, use_container_width=True)
 
     st.markdown(
